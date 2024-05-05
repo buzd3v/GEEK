@@ -31,8 +31,9 @@
 *.out
 *.app
 
-*.vcxprj
-*.vcxprj.filters
-*.vcxprj.user
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 
 .vs
+*.sln
