@@ -39,3 +39,4 @@
 *.sln
 build
 obj
+bin
