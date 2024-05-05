@@ -1,6 +1,6 @@
 
 
-workspace "GE"
+workspace "GEEK"
 	
 	starup = "GE"
 	graphicsEngine = "GE"
@@ -10,7 +10,7 @@ workspace "GE"
 	IncludeDir["glad"] = "%{wks.location}/GE/External/glad/include"
 	
 	architecture "x86_64"
-	startproject (startup)
+	startproject ("GE")
 
 	configurations {
 		"Debug",
