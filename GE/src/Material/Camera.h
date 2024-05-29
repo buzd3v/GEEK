@@ -10,7 +10,9 @@ enum class Camera_Movement {
   ROTATE_LEFT,
   ROTATE_RIGHT,
   ROTATE_UP,
-  ROTATE_DOWN
+  ROTATE_DOWN,
+  ROTATE_CLOCK,
+  ROTATE_DECLOCK
 };
 
 // Default camera values
@@ -39,16 +41,15 @@ class Camera {
   // cam options
   float MovementSpeed, MouseSen, Zoom;
 
-  Camera()
-      : Position(glm::vec3(0, 3, 3)), pitch(-45.f), yaw(-90.f), roll(0) {
+  Camera() : Position(glm::vec3(0, 3, 3)), pitch(-45.f), yaw(-90.f), roll(0) {
     UpdateCameraVector();
   }
 
   glm::mat4 GetViewMatrix();
   void ProcessInput(Camera_Movement command, float deltaTime);
+  void ProcessMouseMovement(float xOffset, float yOffset, float deltaTime);
   void UpdateCameraVector();
-  void SetZoomRatio(float value) { 
-    zoom = value;
-  }
+  void SetZoomRatio(float value) { zoom = value; }
+
  private:
 };

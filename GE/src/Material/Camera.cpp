@@ -18,19 +18,18 @@ glm::mat4 Camera::GetViewMatrix() {
   return glm::lookAt(Position, Position + Front, Up);
 }
 
-void Camera::ProcessInput(Camera_Movement command, float deltaTime) 
-{
+void Camera::ProcessInput(Camera_Movement command, float deltaTime) {
   auto speed = SPEED * deltaTime;
   auto sen = SENSITIVITY * deltaTime;
   switch (command) {
     case Camera_Movement::FORWARD:
-      Position = Position + speed * Front; 
+      Position = Position + speed * Front;
       break;
     case Camera_Movement::BACKWARD:
       Position = Position - speed * Front;
       break;
     case Camera_Movement::LEFT:
-      Position = Position - speed * glm::normalize(glm::cross(Up,Front));
+      Position = Position - speed * glm::normalize(glm::cross(Up, Front));
       break;
     case Camera_Movement::RIGHT:
       Position = Position + speed * glm::normalize(glm::cross(Up, Front));
@@ -41,13 +40,25 @@ void Camera::ProcessInput(Camera_Movement command, float deltaTime)
     case Camera_Movement::ROTATE_RIGHT:
       yaw -= sen;
       break;
-    case Camera_Movement::ROTATE_UP:
-      pitch += sen;
+    case Camera_Movement::ROTATE_DECLOCK:
+      roll -= SENSITIVITY;
       break;
-    case Camera_Movement::ROTATE_DOWN:
-      pitch -= sen;
+    case Camera_Movement::ROTATE_CLOCK:
+      roll += SENSITIVITY;
       break;
     default:
       break;
   }
+  UpdateCameraVector();
+}
+
+void Camera::ProcessMouseMovement(float xOffset, float yOffset,
+                                  float deltaTime) {
+  pitch += SENSITIVITY * yOffset;
+  yaw += SENSITIVITY * xOffset;
+  if (true) {
+    if (pitch > 89.0f) pitch = 89.0f;
+    if (pitch < -89.0f) pitch = -89.0f;
+  }
+  UpdateCameraVector();
 }

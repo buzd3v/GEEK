@@ -1,19 +1,29 @@
 // #define STB_IMAGE_IMPLEMENTATION
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <stb_image.h>
 #include <imgui.h>
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
+#include <stb_image.h>
+
+#include <chrono>
 #include <iostream>
 #include <vector>
 
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 #include "glm/glm.hpp"
 #include "Material/Camera.h"
 #include "Material/Shader.h"
-#include <chrono>
 #include "Prerequisites.h"
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void mouse_button_callback(GLFWwindow* window, int button, int action,
+                           int mods);
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
+int mouse_button_pressed = 0;
+bool firstMouse = true;
+float lastX = 400;
+float lastY = 300;
+float deltaTime = 0;
 std::vector<float> vertices = {
     -0.5f, -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, 0.5f,  0.5f,  -0.5f,
     0.5f,  0.5f,  -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, -0.5f, -0.5f,
@@ -50,8 +60,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 Camera camera;
 
 void poll_event(GLFWwindow* window, float deltaTime);
-
-
 
 int main() {
   glfwInit();
@@ -96,27 +104,28 @@ int main() {
                     "./ShaderFile/lightingShader.frag");
   Shader lightCubeShader("./ShaderFile/light_cube.vert",
                          "./ShaderFile/light_cube.frag");
-  float deltaTime = 0;
 
   glfwSetScrollCallback(window, scroll_callback);
+  // Set the mouse button callback
+  glfwSetMouseButtonCallback(window, mouse_button_callback);
 
-
-  //creating imgui context
+  // Set the cursor position callback
+  glfwSetCursorPosCallback(window, cursor_position_callback);
+  // creating imgui context
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
   io.ConfigFlags |=
       ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
   io.ConfigFlags |=
-      ImGuiConfigFlags_NavEnableGamepad;             // Enable Gamepad Controls
+      ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
 
   // Setup Platform/Renderer backends
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init();
 
-
+  glEnable(GL_DEPTH_TEST);
   while (!glfwWindowShouldClose(window)) {
-
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
 
@@ -126,7 +135,7 @@ int main() {
       static int counter = 0;
 
       ImGui::Begin("Camera info");  // Create a window called "Hello, world!"
-                                      // and append into it.
+                                    // and append into it.
       if (ImGui::BeginTable("Cam info", 2)) {
         ImGui::TableSetupColumn("Property");
         ImGui::TableSetupColumn("Value");
@@ -139,7 +148,7 @@ int main() {
         ImGui::TableSetColumnIndex(1);
         ImGui::Text("%f %f %f", camera.Position.x, camera.Position.y,
                     camera.Position.z);
-        
+
         ImGui::TableNextRow();
 
         ImGui::TableSetColumnIndex(0);
@@ -169,17 +178,15 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    poll_event(window,deltaTime);
-
-    camera.UpdateCameraVector();
+    poll_event(window, deltaTime);
 
     cubeShader.use();
     cubeShader.setVec3("objectColor", glm::vec3(1.f, .5f, .31f));
     cubeShader.setVec3("lightColor", glm::vec3(1.f, 1.f, 1.f));
     // glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-    
-    glm::mat4 projection =
-        glm::perspective(glm::radians(camera.zoom), (float)800 / 600, .1f, 100.f);
+
+    glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
+                                            (float)800 / 600, .1f, 100.f);
 
     glm::mat4 model = glm::mat4(1.f);
     cubeShader.setMat4("projection", projection);
@@ -200,15 +207,11 @@ int main() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
 
-
     auto time_end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<float> duration = (time_end - time_now);
 
-    
-
     deltaTime = duration.count();
-    //while(duration.count() < )
-
+    // while(duration.count() < )
   }
   ImGui_ImplGlfw_Shutdown();
   ImGui_ImplOpenGL3_Shutdown();
@@ -217,27 +220,81 @@ int main() {
   return 0;
 }
 
-void poll_event(GLFWwindow* window, float deltaTime) { 
+void poll_event(GLFWwindow* window, float deltaTime) {
   glfwPollEvents();
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     glfwSetWindowShouldClose(window, true);
 
-  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-  {
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
     camera.ProcessInput(Camera_Movement::FORWARD, deltaTime);
-  } 
-  else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-    camera.ProcessInput(Camera_Movement::BACKWARD, deltaTime); 
-  } 
-  else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+  } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+    camera.ProcessInput(Camera_Movement::BACKWARD, deltaTime);
+  } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
     camera.ProcessInput(Camera_Movement::LEFT, deltaTime);
-  } 
-  else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+  } else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
     camera.ProcessInput(Camera_Movement::RIGHT, deltaTime);
-  } 
- 
+  } else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+    camera.ProcessInput(Camera_Movement::ROTATE_CLOCK, deltaTime);
+  } else if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+    camera.ProcessInput(Camera_Movement::ROTATE_DECLOCK, deltaTime);
+  }
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
   camera.zoom += yoffset;
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action,
+                           int mods) {
+  if (button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (action == GLFW_PRESS)
+      mouse_button_pressed = 1;
+    else if (action == GLFW_RELEASE) {
+      mouse_button_pressed = 0;
+      firstMouse = true;
+    }
+  }
+}
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+  if (mouse_button_pressed) {
+    xpos = static_cast<float>(xpos);
+    ypos = static_cast<float>(ypos);
+
+    if (firstMouse) {
+      lastX = xpos;
+      lastY = ypos;
+      firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset =
+        lastY - ypos;  // reversed since y-coordinates go from bottom to top
+
+    lastX = xpos;
+    lastY = ypos;
+
+    // std::cout << "MouseMove " << xoffset << std::endl;
+
+    camera.ProcessMouseMovement(xoffset, yoffset, deltaTime);
+  }
+}
+void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
+  float xpos = static_cast<float>(xposIn);
+  float ypos = static_cast<float>(yposIn);
+
+  if (firstMouse) {
+    lastX = xpos;
+    lastY = ypos;
+    firstMouse = false;
+  }
+
+  float xoffset = xpos - lastX;
+  float yoffset =
+      lastY - ypos;  // reversed since y-coordinates go from bottom tqo top
+
+  lastX = xpos;
+  lastY = ypos;
+
+  camera.ProcessMouseMovement(xoffset, yoffset, deltaTime);
 }
