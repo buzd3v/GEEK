@@ -10,7 +10,8 @@ workspace "GEEK"
 	IncludeDir["glad"] = "%{wks.location}/GE/External/glad/include"
 	IncludeDir["stb_image"] = "%{wks.location}/GE/External/stb_image"
 	IncludeDir["glm"] = "%{wks.location}/GE/External/glm"
-	
+	IncludeDir["imgui"] = "%{wks.location}/GE/External/imgui"
+
 	architecture "x86_64"
 	startproject ("GE")
 
@@ -30,6 +31,7 @@ workspace "GEEK"
 		include "./GE/External/glad"
 		include "./GE/External/stb_image"
 		include "./GE/External/glm"
+		include "./GE/External/imgui"
 
 	group ""
 
@@ -43,6 +45,7 @@ workspace "GEEK"
 				"./GE/External/glad/premake5.lua",
 				"./GE/External/stb_image/premake5.lua",
 				"./GE/External/glm/premake5.lua",
+				"./GE/External/imgui/premake5.lua",
 
 			}
 	group "ShaderFile"

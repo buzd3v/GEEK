@@ -30,19 +30,25 @@ class Camera {
   glm::vec3 Up;
   glm::vec3 Right;
   glm::vec3 WorldUp;
+
   // euler angles
   float pitch, yaw, roll;  // pitch is around z , yaw is y and roll is z_axis
+
+  float zoom = ZOOM;
 
   // cam options
   float MovementSpeed, MouseSen, Zoom;
 
   Camera()
-      : Position(glm::vec3(0, 3, 3)), pitch(-45.f), yaw(-90.f), roll(-50.f) {
+      : Position(glm::vec3(0, 3, 3)), pitch(-45.f), yaw(-90.f), roll(0) {
     UpdateCameraVector();
   }
 
   glm::mat4 GetViewMatrix();
-
- private:
+  void ProcessInput(Camera_Movement command, float deltaTime);
   void UpdateCameraVector();
+  void SetZoomRatio(float value) { 
+    zoom = value;
+  }
+ private:
 };

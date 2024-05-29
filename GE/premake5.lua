@@ -8,7 +8,8 @@ project "GE"
 		"glfw",
 		"glad",
 		--"stb_image",
-		"opengl32.lib"
+		"opengl32.lib",
+		"imgui"
 	}
 
 	defines
@@ -25,6 +26,7 @@ project "GE"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.imgui}"
 	}
 	
 	files

@@ -17,3 +17,37 @@ void Camera::UpdateCameraVector() {
 glm::mat4 Camera::GetViewMatrix() {
   return glm::lookAt(Position, Position + Front, Up);
 }
+
+void Camera::ProcessInput(Camera_Movement command, float deltaTime) 
+{
+  auto speed = SPEED * deltaTime;
+  auto sen = SENSITIVITY * deltaTime;
+  switch (command) {
+    case Camera_Movement::FORWARD:
+      Position = Position + speed * Front; 
+      break;
+    case Camera_Movement::BACKWARD:
+      Position = Position - speed * Front;
+      break;
+    case Camera_Movement::LEFT:
+      Position = Position - speed * glm::normalize(glm::cross(Up,Front));
+      break;
+    case Camera_Movement::RIGHT:
+      Position = Position + speed * glm::normalize(glm::cross(Up, Front));
+      break;
+    case Camera_Movement::ROTATE_LEFT:
+      yaw += sen;
+      break;
+    case Camera_Movement::ROTATE_RIGHT:
+      yaw -= sen;
+      break;
+    case Camera_Movement::ROTATE_UP:
+      pitch += sen;
+      break;
+    case Camera_Movement::ROTATE_DOWN:
+      pitch -= sen;
+      break;
+    default:
+      break;
+  }
+}

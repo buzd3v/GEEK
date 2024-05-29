@@ -2,14 +2,18 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
-
+#include <imgui.h>
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 #include <iostream>
 #include <vector>
 
 #include "glm/glm.hpp"
 #include "Material/Camera.h"
 #include "Material/Shader.h"
+#include <chrono>
 #include "Prerequisites.h"
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 std::vector<float> vertices = {
     -0.5f, -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, 0.5f,  0.5f,  -0.5f,
     0.5f,  0.5f,  -0.5f, -0.5f, 0.5f,  -0.5f, -0.5f, -0.5f, -0.5f,
@@ -42,6 +46,12 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
   // and height will be significantly larger than specified on retina displays.
   glViewport(0, 0, width, height);
 }
+
+Camera camera;
+
+void poll_event(GLFWwindow* window, float deltaTime);
+
+
 
 int main() {
   glfwInit();
@@ -86,18 +96,90 @@ int main() {
                     "./ShaderFile/lightingShader.frag");
   Shader lightCubeShader("./ShaderFile/light_cube.vert",
                          "./ShaderFile/light_cube.frag");
+  float deltaTime = 0;
+
+  glfwSetScrollCallback(window, scroll_callback);
+
+
+  //creating imgui context
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImGuiIO& io = ImGui::GetIO();
+  io.ConfigFlags |=
+      ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+  io.ConfigFlags |=
+      ImGuiConfigFlags_NavEnableGamepad;             // Enable Gamepad Controls
+
+  // Setup Platform/Renderer backends
+  ImGui_ImplGlfw_InitForOpenGL(window, true);
+  ImGui_ImplOpenGL3_Init();
+
 
   while (!glfwWindowShouldClose(window)) {
+
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+
+    ImGui::NewFrame();
+    {
+      static float f = 0.0f;
+      static int counter = 0;
+
+      ImGui::Begin("Camera info");  // Create a window called "Hello, world!"
+                                      // and append into it.
+      if (ImGui::BeginTable("Cam info", 2)) {
+        ImGui::TableSetupColumn("Property");
+        ImGui::TableSetupColumn("Value");
+        ImGui::TableHeadersRow();
+
+        ImGui::TableNextRow();
+
+        ImGui::TableSetColumnIndex(0);
+        ImGui::Text("Position");
+        ImGui::TableSetColumnIndex(1);
+        ImGui::Text("%f %f %f", camera.Position.x, camera.Position.y,
+                    camera.Position.z);
+        
+        ImGui::TableNextRow();
+
+        ImGui::TableSetColumnIndex(0);
+        ImGui::Text("Pitch");
+        ImGui::TableSetColumnIndex(1);
+        ImGui::Text("%f", camera.pitch);
+
+        ImGui::TableNextRow();
+
+        ImGui::TableSetColumnIndex(0);
+        ImGui::Text("Yaw");
+        ImGui::TableSetColumnIndex(1);
+        ImGui::Text("%f", camera.yaw);
+
+        ImGui::TableNextRow();
+
+        ImGui::TableSetColumnIndex(0);
+        ImGui::Text("Roll");
+        ImGui::TableSetColumnIndex(1);
+        ImGui::Text("%f", camera.roll);
+      }
+      ImGui::EndTable();
+      ImGui::End();
+    }
+    ImGui::Render();
+    auto time_now = std::chrono::high_resolution_clock::now();
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    poll_event(window,deltaTime);
+
+    camera.UpdateCameraVector();
 
     cubeShader.use();
     cubeShader.setVec3("objectColor", glm::vec3(1.f, .5f, .31f));
     cubeShader.setVec3("lightColor", glm::vec3(1.f, 1.f, 1.f));
     // glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-    Camera camera;
+    
     glm::mat4 projection =
-        glm::perspective(glm::radians(45.f), (float)800 / 600, .1f, 100.f);
+        glm::perspective(glm::radians(camera.zoom), (float)800 / 600, .1f, 100.f);
 
     glm::mat4 model = glm::mat4(1.f);
     cubeShader.setMat4("projection", projection);
@@ -115,9 +197,47 @@ int main() {
 
     glBindVertexArray(lightVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
-    glfwPollEvents();
+
+
+    auto time_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<float> duration = (time_end - time_now);
+
+    
+
+    deltaTime = duration.count();
+    //while(duration.count() < )
+
   }
+  ImGui_ImplGlfw_Shutdown();
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui::DestroyContext();
   glfwTerminate();
   return 0;
+}
+
+void poll_event(GLFWwindow* window, float deltaTime) { 
+  glfwPollEvents();
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, true);
+
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+  {
+    camera.ProcessInput(Camera_Movement::FORWARD, deltaTime);
+  } 
+  else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+    camera.ProcessInput(Camera_Movement::BACKWARD, deltaTime); 
+  } 
+  else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+    camera.ProcessInput(Camera_Movement::LEFT, deltaTime);
+  } 
+  else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+    camera.ProcessInput(Camera_Movement::RIGHT, deltaTime);
+  } 
+ 
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+  camera.zoom += yoffset;
 }
