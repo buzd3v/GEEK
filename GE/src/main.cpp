@@ -26,7 +26,7 @@ float lastY = 300;
 float deltaTime = 0;
 
 // lighting
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(.2f, .0f, 1.0f);
 std::vector<float> vertices = {
 
     -0.5f, -0.5f, -0.5f, 0.0f,  0.0f,  -1.0f, 0.5f,  -0.5f, -0.5f,
@@ -211,6 +211,7 @@ int main() {
     cubeShader.setMat4("view", camera.GetViewMatrix());
     cubeShader.setMat4("model", model);
     cubeShader.setVec3("lightPos", lightPos);
+    cubeShader.setVec3("viewPos", camera.Position);
 
     glBindVertexArray(cubeVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -219,15 +220,13 @@ int main() {
  
 
     glm::mat4 lightModel = model;
-    lightModel = glm::rotate(model, (float)glm::sin(glm::radians(glfwGetTime())),
-                glm::vec3(7, 1, 0)); 
     lightModel = glm::translate(lightModel, lightPos);
     lightModel = glm::scale(lightModel, glm::vec3(.2f)); 
 
     lightCubeShader.setMat4("projection", projection);
     lightCubeShader.setMat4("view", camera.GetViewMatrix());
     lightCubeShader.setMat4("model", lightModel);
-
+    
 
     glBindVertexArray(lightVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
