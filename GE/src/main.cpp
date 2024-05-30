@@ -24,6 +24,9 @@ bool firstMouse = true;
 float lastX = 400;
 float lastY = 300;
 float deltaTime = 0;
+
+// lighting
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 std::vector<float> vertices = {
 
     -0.5f, -0.5f, -0.5f, 0.0f,  0.0f,  -1.0f, 0.5f,  -0.5f, -0.5f,
@@ -106,8 +109,9 @@ int main() {
   // position attribute
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-  glEnableVertexAttribArray(0);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                        (void*)(3 * sizeof(float)));
+  glEnableVertexAttribArray(1);
 
   glBindVertexArray(lightVAO);
   // position attribute
@@ -189,7 +193,7 @@ int main() {
     }
     ImGui::Render();
     auto time_now = std::chrono::high_resolution_clock::now();
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.f, 0.f, 0.f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     poll_event(window, deltaTime);
@@ -206,15 +210,24 @@ int main() {
     cubeShader.setMat4("projection", projection);
     cubeShader.setMat4("view", camera.GetViewMatrix());
     cubeShader.setMat4("model", model);
+    cubeShader.setVec3("lightPos", lightPos);
 
     glBindVertexArray(cubeVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     lightCubeShader.use();
-    glm::mat4 lightModel = glm::translate(model, glm::vec3(1, -1, -4));
+ 
+
+    glm::mat4 lightModel = model;
+    lightModel = glm::rotate(model, (float)glm::sin(glm::radians(glfwGetTime())),
+                glm::vec3(7, 1, 0)); 
+    lightModel = glm::translate(lightModel, lightPos);
+    lightModel = glm::scale(lightModel, glm::vec3(.2f)); 
+
     lightCubeShader.setMat4("projection", projection);
     lightCubeShader.setMat4("view", camera.GetViewMatrix());
     lightCubeShader.setMat4("model", lightModel);
+
 
     glBindVertexArray(lightVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
