@@ -32,6 +32,7 @@ workspace "GEEK"
 		include "./GE/External/stb_image"
 		include "./GE/External/glm"
 		include "./GE/External/imgui"
+		include "./GE/External/assimp"
 
 	group ""
 
@@ -46,6 +47,7 @@ workspace "GEEK"
 				"./GE/External/stb_image/premake5.lua",
 				"./GE/External/glm/premake5.lua",
 				"./GE/External/imgui/premake5.lua",
+				"./GE/External/assimp/premake5.lua",
 
 			}
 	group "ShaderFile"

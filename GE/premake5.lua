@@ -9,7 +9,8 @@ project "GE"
 		"glad",
 		--"stb_image",
 		"opengl32.lib",
-		"imgui"
+		"imgui",
+		"assimp"
 	}
 
 	defines
