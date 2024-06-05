@@ -36,5 +36,12 @@ project "GE"
 		"src/**.cpp",
 		"src/Material/**.cpp",
 		"src/Material/**.h",
+		"src/Graphic/**.h",
+		"src/Graphic/**.cpp",
+		"src/Window/**.cpp",
+		"src/Window/**.h",
+		"src/Core/**.cpp",
+		"src/Core/**.h",
+
 	}
 	
