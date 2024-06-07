@@ -38,10 +38,17 @@ project "GE"
 		"src/Material/**.h",
 		"src/Graphic/**.h",
 		"src/Graphic/**.cpp",
-		"src/Window/**.cpp",
-		"src/Window/**.h",
 		"src/Core/**.cpp",
 		"src/Core/**.h",
+		"src/API/**.cpp",
+		"src/API/**.h",
+		"src/Window/**.cpp",
+		"src/Window/**.h",
+		"src/Window/WindowAPI/**.cpp",
+		"src/Window/WindowAPI/**.h",
+		"src/Window/WindowAPI/GlfwWindow/**.cpp",
+		"src/Window/WindowAPI/GlfwWindow/**.h",
+
 
 	}
 	
