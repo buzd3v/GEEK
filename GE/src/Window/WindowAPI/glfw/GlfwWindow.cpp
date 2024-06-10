@@ -22,6 +22,10 @@ void Geek::WindowAPI::GlfwWindow::CreateWindow()
 	glfwMakeContextCurrent(m_windowHandle);
 }
 
+void Geek::WindowAPI::GlfwWindow::Shutdown()
+{
+}
+
 void Geek::WindowAPI::GlfwWindow::InitProperty(WindowType type, int width, int height)
 {
 	m_height = height;

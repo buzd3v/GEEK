@@ -10,7 +10,8 @@ project "GE"
 		--"stb_image",
 		"opengl32.lib",
 		"imgui",
-		"assimp"
+		"assimp",
+		"pugixml"
 	}
 
 	defines
@@ -18,6 +19,7 @@ project "GE"
 		"_CRT_SECURE_NO_WARNINGS",
 		"GLFW_INCLUDE_NONE",
 		"STB_IMAGE_IMPLEMENTATION",
+		"PUGIXML_HEADER_ONLY"
 	}
 
 	includedirs
@@ -27,7 +29,8 @@ project "GE"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.pugixml}",
 	}
 	
 	files
@@ -51,4 +54,10 @@ project "GE"
 
 
 	}
-	
+	filter "configurations:Debug"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"

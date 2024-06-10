@@ -6,6 +6,7 @@ namespace Geek {
 		class GlfwWindow : public IWindowAPI
 		{
 		private:
+
 			GLFWwindow* m_windowHandle;
 
 		public:

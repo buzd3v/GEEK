@@ -11,6 +11,7 @@ workspace "GEEK"
 	IncludeDir["stb_image"] = "%{wks.location}/GE/External/stb_image"
 	IncludeDir["glm"] = "%{wks.location}/GE/External/glm"
 	IncludeDir["imgui"] = "%{wks.location}/GE/External/imgui"
+	IncludeDir["pugixml"] = "%{wks.location}/GE/External/pugixml/src"
 
 	architecture "x86_64"
 	startproject ("GE")
@@ -33,6 +34,7 @@ workspace "GEEK"
 		include "./GE/External/glm"
 		include "./GE/External/imgui"
 		include "./GE/External/assimp"
+		include "./GE/External/pugixml"
 
 	group ""
 
@@ -48,7 +50,7 @@ workspace "GEEK"
 				"./GE/External/glm/premake5.lua",
 				"./GE/External/imgui/premake5.lua",
 				"./GE/External/assimp/premake5.lua",
-
+				"./GE/External/pugixml/premake5.lua",
 			}
 	group "ShaderFile"
 		project "ShaderFile"

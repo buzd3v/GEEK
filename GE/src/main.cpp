@@ -2,6 +2,5 @@
 
 int main() { 
   Geek::Application::Start();
-
   return 0;
 }
