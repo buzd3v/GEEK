@@ -20,6 +20,9 @@ namespace Geek {
 	 }																															\
 	b_##varName = node.text().as_##type();													\
 
+#define GET_CONFIG_VAR(className, variable)		className::GetInstance()->variable						
+		
+
 	class IConfigVar {
 	
 	protected:

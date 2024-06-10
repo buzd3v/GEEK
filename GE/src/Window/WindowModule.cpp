@@ -6,6 +6,10 @@ using namespace Geek::WindowAPI;
 void Geek::WindowModule::Startup()
 {
 	WindowConfig::GetInstance()->Construct("WindowConfig.xml");
+	m_window = new GlfwWindow();
+	m_window->CreateContext();
+	m_window->CreateWindow();
+
 }
 
 void Geek::WindowModule::Update(float deltaTime)

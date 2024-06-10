@@ -1,6 +1,6 @@
 #include "GLFW/glfw3.h"
 #include "GlfwWindow.h"
-
+#include "Window/WindowConfig.h"
 
 void Geek::WindowAPI::GlfwWindow::CreateContext()
 {
@@ -12,24 +12,18 @@ void Geek::WindowAPI::GlfwWindow::CreateContext()
 
 void Geek::WindowAPI::GlfwWindow::CreateWindow()
 {
-	m_windowHandle = glfwCreateWindow(m_width, m_height, "LearnOpenGL", NULL, NULL);
+	m_windowHandle = glfwCreateWindow(GET_CONFIG_VAR(WindowConfig, m_screenWidth),
+																		GET_CONFIG_VAR(WindowConfig, m_screenHeight), 
+																		GET_CONFIG_VAR(WindowConfig, m_windowName).c_str(),
+																		NULL, NULL);
 	if (m_windowHandle == NULL)
 	{
-		//std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
-		//return -1;
 	}
 	glfwMakeContextCurrent(m_windowHandle);
 }
 
 void Geek::WindowAPI::GlfwWindow::Shutdown()
 {
-}
-
-void Geek::WindowAPI::GlfwWindow::InitProperty(WindowType type, int width, int height)
-{
-	m_height = height;
-	m_width = width;
-	m_windowType = type;
 }
 

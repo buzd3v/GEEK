@@ -1,34 +1,17 @@
 #pragma once
-
+#include <string>
 namespace Geek {
 	namespace WindowAPI {
-
-		enum class WindowType {
-			FullScreen,
-			Windowed,
-			NoBorder,
-			KeepResolution,
-		};
 
 		class IWindowAPI
 		{
 		protected:
-			WindowType m_windowType;
-			int m_width, m_height;
 
 		public:
-			IWindowAPI() : m_width(0), m_height(0), m_windowType(WindowType::FullScreen) {
-
-			}
-
-			virtual void CreateContext() {};
-			virtual void InitProperty(WindowType type, int width, int height) {};
-			virtual void CreateWindow() {};
-			virtual void Shutdown() {};
+			virtual void CreateContext() = 0;
+			virtual void CreateWindow() = 0;
+			virtual void Shutdown() = 0;
 		};
-
-
-
 	};// namespace WindowAPI
 };// namespace Geek
 

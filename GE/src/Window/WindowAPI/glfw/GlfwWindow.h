@@ -1,5 +1,7 @@
 #pragma once
 #include "../IWindowAPI.h"
+#include <string>
+#include <GLFW/glfw3.h>
 
 namespace Geek {
 	namespace WindowAPI {
@@ -11,7 +13,6 @@ namespace Geek {
 
 		public:
 			void CreateContext() override;
-			void InitProperty(WindowType type, int width, int height) override;
 			void CreateWindow() override;
 			void Shutdown() override;
 		};

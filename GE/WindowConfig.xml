@@ -1,4 +1,8 @@
 <Config>
-	<screenWidth>800</screenWidth>
+	<screenWidth>22232</screenWidth>
+	<screenHeight>600</screenHeight>
+	<windowName>HelloWorld</windowName>
+	<showCusor>0</showCusor>
+	<fullScreen>0</fullScreen>
 </Config>
 			
