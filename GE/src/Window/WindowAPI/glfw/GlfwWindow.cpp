@@ -13,9 +13,9 @@ void Geek::WindowAPI::GlfwWindow::CreateContext()
 void Geek::WindowAPI::GlfwWindow::CreateWindow()
 {
 	m_windowHandle = glfwCreateWindow(GET_CONFIG_VAR(WindowConfig, m_screenWidth),
-																		GET_CONFIG_VAR(WindowConfig, m_screenHeight), 
-																		GET_CONFIG_VAR(WindowConfig, m_windowName).c_str(),
-																		NULL, NULL);
+		GET_CONFIG_VAR(WindowConfig, m_screenHeight),
+		GET_CONFIG_VAR(WindowConfig, m_windowName).c_str(),
+		NULL, NULL);
 	if (m_windowHandle == NULL)
 	{
 		glfwTerminate();
@@ -23,7 +23,19 @@ void Geek::WindowAPI::GlfwWindow::CreateWindow()
 	glfwMakeContextCurrent(m_windowHandle);
 }
 
+void Geek::WindowAPI::GlfwWindow::Update(float deltaTime)
+{
+	if (glfwWindowShouldClose(m_windowHandle))
+	{
+		Shutdown();
+	}
+	glfwSwapBuffers(m_windowHandle);
+}
+
 void Geek::WindowAPI::GlfwWindow::Shutdown()
 {
+	glfwDestroyWindow(m_windowHandle);
+	m_windowHandle = nullptr;
+	glfwTerminate();
 }
 

@@ -1,6 +1,6 @@
+#include "Window/WindowConfig.h"
 #include "WindowAPI/IWindowAPI.h"
 #include "WindowModule.h"
-#include "Window/WindowConfig.h"
 using namespace Geek::WindowAPI;
 
 void Geek::WindowModule::Startup()
@@ -14,8 +14,10 @@ void Geek::WindowModule::Startup()
 
 void Geek::WindowModule::Update(float deltaTime)
 {
+	m_window->Update(deltaTime);
 }
 
 void Geek::WindowModule::Shutdown()
 {
+
 }

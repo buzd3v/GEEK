@@ -1,7 +1,7 @@
 #pragma once
 #include "../IWindowAPI.h"
-#include <string>
 #include <GLFW/glfw3.h>
+#include <string>
 
 namespace Geek {
 	namespace WindowAPI {
@@ -14,6 +14,7 @@ namespace Geek {
 		public:
 			void CreateContext() override;
 			void CreateWindow() override;
+			void Update(float deltaTime) override;
 			void Shutdown() override;
 		};
 	};

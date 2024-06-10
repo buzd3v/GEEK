@@ -1,7 +1,7 @@
 <Config>
-	<screenWidth>22232</screenWidth>
+	<screenWidth>800</screenWidth>
 	<screenHeight>600</screenHeight>
-	<windowName>HelloWorld</windowName>
+	<windowName>My Engine</windowName>
 	<showCusor>0</showCusor>
 	<fullScreen>0</fullScreen>
 </Config>

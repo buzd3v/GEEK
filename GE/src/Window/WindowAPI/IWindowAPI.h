@@ -10,6 +10,7 @@ namespace Geek {
 		public:
 			virtual void CreateContext() = 0;
 			virtual void CreateWindow() = 0;
+			virtual void Update(float deltaTime) = 0;
 			virtual void Shutdown() = 0;
 		};
 	};// namespace WindowAPI
