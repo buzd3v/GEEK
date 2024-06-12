@@ -5,14 +5,16 @@
 #include "WindowAPI/glfw/GlfwWindow.h"
 namespace Geek {
 	
-	class WindowConfig : public SingletonDclp<WindowConfig> , public IConfigVar
+	class WindowConfig : public IConfigVar
 	{
 		friend class WindowModule;
 		friend class WindowAPI::GlfwWindow;
 
 	public:
-		WindowConfig(std::string filePath);
-		void BindToConfig() override;
+		WindowConfig() = default;
+		~WindowConfig() = default;
+
+		void BindToConfig(pugi::xml_node root) override;
 
 	protected: 
 		int m_screenWidth;

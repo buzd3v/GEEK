@@ -19,7 +19,7 @@ project "pugixml"
 		{ 
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS",
-			"PUGIXML_HEADER_ONLY"
+			"PUGIXML_HEADER_ONLY",
 		}
 
 	filter "configurations:Debug"

@@ -1,43 +1,45 @@
 #include "EngineLoop.h"
-#include "Window/WindowModule.h"
 
+#include "Window/WindowModule.h"
 
 Geek::EngineLoop::EngineLoop()
 {
 	InitializeModule();
 }
 
-Geek::EngineLoop::~EngineLoop()
-{
-}
+Geek::EngineLoop::~EngineLoop() {}
 
-void Geek::EngineLoop::InitializeModule()
+void
+Geek::EngineLoop::InitializeModule()
 {
 	m_windowModule = new WindowModule();
 }
 
-void Geek::EngineLoop::Run()
+void
+Geek::EngineLoop::Run()
 {
 	Startup();
-	while (b_isRunning)
-	{
+	while (b_isRunning) {
 		Update();
 	}
 	Shutdown();
 }
 
-void Geek::EngineLoop::Update()
+void
+Geek::EngineLoop::Update()
 {
-	float deltaTime = 0;
+	float deltaTime = 0.1;
 	m_windowModule->Update(deltaTime);
 }
 
-void Geek::EngineLoop::Startup()
+void
+Geek::EngineLoop::Startup()
 {
 	m_windowModule->Startup();
 }
 
-void Geek::EngineLoop::Shutdown()
+void
+Geek::EngineLoop::Shutdown()
 {
 	m_windowModule->Shutdown();
 }
