@@ -31,6 +31,7 @@ project "GE"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.pugixml}",
+		"%{IncludeDir.sid}",
 	}
 	
 	files
