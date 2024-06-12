@@ -28,7 +28,7 @@ Geek::EngineLoop::Run()
 void
 Geek::EngineLoop::Update()
 {
-	float deltaTime = 0;
+	float deltaTime = 0.1;
 	m_windowModule->Update(deltaTime);
 }
 

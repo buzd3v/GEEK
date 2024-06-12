@@ -1,7 +1,7 @@
 #include "GLFW/glfw3.h"
 #include "GlfwWindow.h"
 #include "Window/WindowConfig.h"
-
+#include "Application.h"
 void Geek::WindowAPI::GlfwWindow::CreateContext()
 {
 	glfwInit();
@@ -27,7 +27,7 @@ void Geek::WindowAPI::GlfwWindow::Update(float deltaTime)
 {
 	if (glfwWindowShouldClose(m_windowHandle))
 	{
-		Shutdown();
+		Application::Exit();
 	}
 	glfwSwapBuffers(m_windowHandle);
 }

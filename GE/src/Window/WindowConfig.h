@@ -5,13 +5,15 @@
 #include "WindowAPI/glfw/GlfwWindow.h"
 namespace Geek {
 	
-	class WindowConfig : public SingletonDclp<WindowConfig> , public IConfigVar
+	class WindowConfig : public IConfigVar
 	{
 		friend class WindowModule;
 		friend class WindowAPI::GlfwWindow;
 
 	public:
-		WindowConfig(std::string filePath);
+		WindowConfig() = default;
+		~WindowConfig() = default;
+
 		void BindToConfig() override;
 
 	protected: 

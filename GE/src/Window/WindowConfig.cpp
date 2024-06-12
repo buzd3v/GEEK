@@ -1,11 +1,6 @@
 #include "WindowConfig.h"
 
-Geek::WindowConfig::WindowConfig(std::string filePath) 
-{
-  m_filePath = filePath;
-  IConfigVar::ReadData();
-  BindToConfig();
-}
+
 
 void Geek::WindowConfig::BindToConfig()
 {
