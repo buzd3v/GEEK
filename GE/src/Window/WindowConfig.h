@@ -14,7 +14,7 @@ namespace Geek {
 		WindowConfig() = default;
 		~WindowConfig() = default;
 
-		void BindToConfig() override;
+		void BindToConfig(pugi::xml_node root) override;
 
 	protected: 
 		int m_screenWidth;

@@ -5,7 +5,7 @@
 #include <iostream>
 namespace Geek {
 #define SET_CONFIG_VAR(varName, type)															\
-	node = root.child(#varName);										\
+	auto node = root.child(#varName);										\
 	if (!node) {																										\
 		std::cout << "Error accessing " << #varName << " node element!" << std::endl;		\
 		return;																												\
@@ -13,7 +13,7 @@ namespace Geek {
 	m_##varName = node.text().as_##type();													\
 
 #define SET_CONFIG_B_VAR(varName, type)															\
-	node = root.child(#varName);										\
+	auto node =  root.child(#varName);										\
 	if (!node) {																										\
 		std::cout << "Error accessing " << #varName << " node element!" << std::endl;		\
 		return;																												\
@@ -25,7 +25,7 @@ namespace Geek {
 
 	class IConfigVar {
 	public:
-		virtual void BindToConfig() = 0;
+		virtual void BindToConfig(pugi::xml_node root) = 0;
 	};
 	
 };

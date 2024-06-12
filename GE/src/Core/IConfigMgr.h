@@ -14,8 +14,9 @@ namespace Geek
 		std::string m_filePath;
 
 		//for read xml data
-		pugi::xml_node root;
 		pugi::xml_document* doc;
+		pugi::xml_node root;
+		pugi::xml_node firstChild;
 		pugi::xml_node node;
 
 		std::vector<IConfigVar> m_listConfig;
@@ -36,6 +37,13 @@ namespace Geek
 			if (root == nullptr) {
 				std::cout << "Error accessing root element!" << std::endl;
 			}
+
+			firstChild = root.first_child();
+			if (firstChild == nullptr)
+			{
+				std::cout << "Cannot find child" << std::endl;
+			}
+
 		}
 
 		virtual void AddToConfigList() = 0;

@@ -8,7 +8,7 @@ namespace Geek
 	class WindowConfigMgr : public IConfigMgr, SingletonDclp<WindowConfigMgr>
 	{
 	public:
-		WindowConfigMgr(std::string filePath);
+		WindowConfigMgr(std::string filePath, std::string rootNodeName);
 
 		// Inherited via IConfigMgr
 		void AddToConfigList() override;
