@@ -15,6 +15,9 @@
 *.so
 *.dylib
 *.dll
+*.pdb
+
+
 
 # Fortran module files
 *.mod
@@ -30,6 +33,7 @@
 *.exe
 *.out
 *.app
+Microsoft.DTfW.DHL.manifest
 
 *.vcxproj
 *.vcxproj.filters
@@ -40,3 +44,5 @@
 build
 obj
 bin
+
+!GE/External/vld/**

@@ -7,11 +7,9 @@ using namespace Geek::WindowAPI;
 void Geek::WindowModule::Startup()
 {
 	ConfigMgr<WindowConfig>::GetInstance()->Construct("WindowConfig.xml", "Config");
-	auto c = ConfigMgr<WindowConfig>::GetInstance();
 	m_window = new GlfwWindow();
 	m_window->CreateContext();
 	m_window->CreateWindow();
-
 }
 
 void Geek::WindowModule::Update(float deltaTime)
@@ -21,5 +19,7 @@ void Geek::WindowModule::Update(float deltaTime)
 
 void Geek::WindowModule::Shutdown()
 {
-
+	m_window->Shutdown();
+	delete m_window;
+	ConfigMgr<WindowConfig>::GetInstance()->Destruct();
 }

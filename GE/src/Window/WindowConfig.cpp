@@ -1,6 +1,6 @@
 #include "WindowConfig.h"
 
-
+using namespace Geek;
 
 void Geek::WindowConfig::BindToConfig(pugi::xml_node& root)
 {

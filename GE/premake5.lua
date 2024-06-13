@@ -4,6 +4,10 @@ project "GE"
 	cppdialect "C++20"
 	staticruntime "off"
 
+	libdirs { 
+	 	"./External/vld/lib/Win64"
+	}
+
 	links {
 		"glfw",
 		"glad",
@@ -11,7 +15,8 @@ project "GE"
 		"opengl32.lib",
 		"imgui",
 		"assimp",
-		"pugixml"
+		"pugixml",
+		"vld"
 	}
 
 	defines
@@ -32,6 +37,7 @@ project "GE"
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.pugixml}",
 		"%{IncludeDir.sid}",
+		"%{IncludeDir.vld}",
 	}
 	
 	files
@@ -55,10 +61,19 @@ project "GE"
 
 
 	}
+	
+function copyVldNeeded()
+    return {
+        "{COPY} External/vld/bin/Win64/** %{cfg.targetdir}/bin/Debug/",
+    }
+end	
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
+		postbuildcommands (copyVldNeeded())
+            
 
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
+

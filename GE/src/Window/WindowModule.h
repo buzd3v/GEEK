@@ -4,7 +4,6 @@
 #include "WindowAPI/glfw/GlfwWindow.h"
 
 namespace Geek {
-	class WindowConfig;
 	class WindowModule : public IModule {
 
 	public:
@@ -15,6 +14,5 @@ namespace Geek {
 	private:
 		WindowAPI::GlfwWindow* m_window;
 	};
-
 
 }; //namespace Geek

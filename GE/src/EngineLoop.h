@@ -15,7 +15,6 @@ namespace Geek {
 		bool b_isRunning;
 
 		//Engine Module
-		//class GraphicModule* m_graphicModule;
 		class WindowModule* m_windowModule;
 
 	private:
