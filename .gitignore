@@ -45,6 +45,7 @@ bin
 
 
 
+!GE/bin/*
 !GE/bin/**
 !GE/External/vld/**
 
