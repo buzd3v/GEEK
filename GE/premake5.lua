@@ -62,15 +62,15 @@ project "GE"
 
 	}
 	
---function copyVldNeeded()
---    return {
---        "{COPY} External/vld/bin/Win64/** %{cfg.targetdir}",
---    }
---end	
+function copyVldNeeded()
+    return {
+        "{COPY} External/vld/bin/Win64/** %{cfg.targetdir}/bin/Debug/",
+    }
+end	
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
-		--postbuildcommands (copyVldNeeded())
+		postbuildcommands (copyVldNeeded())
             
 
 	filter "configurations:Release"
