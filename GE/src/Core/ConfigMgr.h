@@ -55,6 +55,12 @@ namespace Geek //TODO: consider dynamic alloc or not
 
 		}
 
+		~ConfigMgr()
+		{
+			//doc->reset();
+			delete doc;
+		}
+
 		void AddToConfigList()
 		{
 			while (m_firstChild != NULL)

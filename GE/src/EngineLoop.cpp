@@ -42,4 +42,9 @@ void
 Geek::EngineLoop::Shutdown()
 {
 	m_windowModule->Shutdown();
+
+	delete m_windowModule;
+
+	//self calling destruct
+	EngineLoop::Destruct();
 }

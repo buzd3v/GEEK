@@ -33,6 +33,7 @@ void Geek::WindowAPI::GlfwWindow::Update(float deltaTime)
 		Application::Exit();
 	}
 	glfwSwapBuffers(m_windowHandle);
+	glfwPollEvents();
 }
 
 void Geek::WindowAPI::GlfwWindow::Shutdown()
