@@ -2,6 +2,7 @@
 #include "GlfwWindow.h"
 #include "Window/WindowConfig.h"
 #include "Application.h"
+#include "Core/ConfigMgr.h"
 void Geek::WindowAPI::GlfwWindow::CreateContext()
 {
 	glfwInit();
@@ -12,10 +13,12 @@ void Geek::WindowAPI::GlfwWindow::CreateContext()
 
 void Geek::WindowAPI::GlfwWindow::CreateWindow()
 {
-	m_windowHandle = glfwCreateWindow(GET_CONFIG_VAR(WindowConfig, m_screenWidth),
-		GET_CONFIG_VAR(WindowConfig, m_screenHeight),
-		GET_CONFIG_VAR(WindowConfig, m_windowName).c_str(),
-		NULL, NULL);
+	WindowConfig config = GET_CONFIG(ConfigMgr<WindowConfig>, "WindowSetting");
+
+	m_windowHandle = glfwCreateWindow(GET_CONFIG_VAR(config, m_screenWidth),
+		GET_CONFIG_VAR(config, m_screenHeight),
+		GET_CONFIG_VAR(config, m_windowName).c_str(),
+		NULL, NULL); 
 	if (m_windowHandle == NULL)
 	{
 		glfwTerminate();

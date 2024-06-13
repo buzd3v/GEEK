@@ -2,8 +2,9 @@
 
 
 
-void Geek::WindowConfig::BindToConfig(pugi::xml_node root)
+void Geek::WindowConfig::BindToConfig(pugi::xml_node& root)
 {
+    SET_CONFIG_VAR(configName, string); //MUST IMPLEMENT THIS LINE OF CODE FOR ALL CONFIG
 		SET_CONFIG_VAR(screenWidth, int);
     SET_CONFIG_VAR(screenHeight, int);
     SET_CONFIG_VAR(windowName, string);

@@ -5,9 +5,8 @@ namespace Geek
 {
 	class ActionConfig : public IConfigVar
 	{
+	public:
 		// Inherited via IConfigVar
-		void BindToConfig() override;
-
-
+		void BindToConfig(pugi::xml_node& root) override;
 	};
 } // namespace Geek
