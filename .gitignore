@@ -1,7 +1,3 @@
-
-!./GE/bin/Debug
-!./GE/External/vld
-
 # Prerequisites
 *.d
 
@@ -47,5 +43,9 @@ build
 obj
 bin
 
+
+
+!./GE/bin/*
+!./GE/External/vld/*
 ./GE/bin/Debug/GE.exe
 ./GE/bin/Debug/GE.pdb
