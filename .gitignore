@@ -45,7 +45,8 @@ bin
 
 
 
-!./GE/bin/*
-!./GE/External/vld/*
-./GE/bin/Debug/GE.exe
-./GE/bin/Debug/GE.pdb
+!GE/bin/**
+!GE/External/vld/**
+
+GE/bin/Debug/GE.exe
+GE/bin/Debug/GE.pdb
