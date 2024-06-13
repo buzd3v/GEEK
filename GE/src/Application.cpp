@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "EngineLoop.h"
 
+#include "vld.h"
+
 void Geek::Application::Start()
 {
 	if (EngineLoop::GetInstance() == nullptr)

@@ -16,6 +16,8 @@
 *.dylib
 *.dll
 
+
+
 # Fortran module files
 *.mod
 *.smod
@@ -40,3 +42,8 @@
 build
 obj
 bin
+
+!GE/bin/Debug
+!GE/External/vld
+GE/bin/Debug/GE.exe
+GE/bin/Debug/GE.pdb

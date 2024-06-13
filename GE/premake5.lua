@@ -4,6 +4,10 @@ project "GE"
 	cppdialect "C++20"
 	staticruntime "off"
 
+	libdirs { 
+	 	"./External/vld/lib/Win64"
+	}
+
 	links {
 		"glfw",
 		"glad",
@@ -11,7 +15,8 @@ project "GE"
 		"opengl32.lib",
 		"imgui",
 		"assimp",
-		"pugixml"
+		"pugixml",
+		"vld"
 	}
 
 	defines
@@ -32,6 +37,7 @@ project "GE"
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.pugixml}",
 		"%{IncludeDir.sid}",
+		"%{IncludeDir.vld}",
 	}
 	
 	files

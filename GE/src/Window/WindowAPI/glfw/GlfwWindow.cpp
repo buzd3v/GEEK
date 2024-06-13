@@ -16,9 +16,9 @@ void Geek::WindowAPI::GlfwWindow::CreateWindow()
 	WindowConfig config = GET_CONFIG(ConfigMgr<WindowConfig>, "WindowSetting");
 
 	m_windowHandle = glfwCreateWindow(GET_CONFIG_VAR(config, m_screenWidth),
-		GET_CONFIG_VAR(config, m_screenHeight),
-		GET_CONFIG_VAR(config, m_windowName).c_str(),
-		NULL, NULL); 
+																		GET_CONFIG_VAR(config, m_screenHeight),
+																		GET_CONFIG_VAR(config, m_windowName).c_str(),
+																		NULL, NULL); 
 	if (m_windowHandle == NULL)
 	{
 		glfwTerminate();

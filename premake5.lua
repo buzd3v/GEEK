@@ -13,7 +13,7 @@ workspace "GEEK"
 	IncludeDir["imgui"] = "%{wks.location}/GE/External/imgui"
 	IncludeDir["pugixml"] = "%{wks.location}/GE/External/pugixml/src"
 	IncludeDir["sid"] = "%{wks.location}/GE/External/string-id"
-
+	IncludeDir["vld"] = "%{wks.location}/GE/External/vld/include"
 
 	architecture "x86_64"
 	startproject ("GE")

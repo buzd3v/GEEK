@@ -11,7 +11,6 @@ void Geek::WindowModule::Startup()
 	m_window = new GlfwWindow();
 	m_window->CreateContext();
 	m_window->CreateWindow();
-
 }
 
 void Geek::WindowModule::Update(float deltaTime)
@@ -21,5 +20,6 @@ void Geek::WindowModule::Update(float deltaTime)
 
 void Geek::WindowModule::Shutdown()
 {
-
+	m_window->Shutdown();
+	m_window = nullptr;
 }
