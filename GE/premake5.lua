@@ -5,7 +5,8 @@ project "GE"
 	staticruntime "off"
 
 	libdirs { 
-	 	"./External/vld/lib/Win64"
+	 	"./External/vld/lib/Win64",
+		"./External/vld/bin/Win64"
 	}
 
 	links {
@@ -64,9 +65,12 @@ project "GE"
 	
 function copyVldNeeded()
     return {
-        "{COPY} External/vld/bin/Win64/** %{cfg.targetdir}/bin/Debug/",
+        "{COPY} External/vld/bin/Win64/** bin/%{cfg.platform}/%{cfg.buildcfg}",
+		"{COPY} External/vld/vld.ini bin/%{cfg.platform}/%{cfg.buildcfg}",
+
     }
 end	
+
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
