@@ -31,7 +31,7 @@ namespace Geek
   };
 
   //for mouse button
-  enum class MOUSEBUTTON 
+  enum class MouseButton 
   {
     RMB,
     LMB,

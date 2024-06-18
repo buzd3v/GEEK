@@ -1,6 +1,6 @@
 #include "ActionMgr.h"
 
-void Geek::ActionMgr::Trigger(std::string actionName)
-{
 
+void Geek::ActionMgr::Excute(std::string actionName)
+{
 }

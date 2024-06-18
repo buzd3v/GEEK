@@ -1,17 +1,17 @@
 #pragma once
 
 #include "Core/ConfigMgr.h"
-#include "ActionConfig.h"
+#include "Action.h"
 #include <functional>
 
 namespace Geek
 {
-	class ActionMgr : public ConfigMgr<ActionConfig>
+	class ActionMgr : public ConfigMgr<Action>
 	{
 	public:
 		template <typename T>
 		void Connect(std::string actionName, std::function<T> callback);
-		void Trigger(std::string actionName);
+		void Excute(std::string actionName);
 	};
 
 	template<typename T>
