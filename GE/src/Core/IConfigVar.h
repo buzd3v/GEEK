@@ -22,7 +22,15 @@ namespace Geek {
 	 }																															\
 	b_##varName = node.text().as_##type();													\
 
-#define GET_CONFIG_VAR(config, variable) config.variable
+#define SET_CONFIG_VAR_STR(varName)															\
+	node = root.child(#varName);										\
+	if (!node) {																										\
+		std::cout << "Error accessing " << #varName << " node element!" << std::endl;		\
+		return;																												\
+	 }																															\
+	std::string varName = node.text().as_string();													\
+
+#define GET_CONFIG_VAR(config, variable) config.variable				
 		
 #define GET_CONFIG(classMgrName, configName)		classMgrName::GetInstance()->FindConfig(configName)
 	class IConfigVar {

@@ -27,7 +27,7 @@ namespace Geek
 
     // Punctuation keys
     COMMA, PERIOD, SLASH, SEMICOLON, QUOTE, LEFT_BRACKET,
-    RIGHT_BRACKET, BACKSLASH, MINUS, EQUAL
+    RIGHT_BRACKET, BACKSLASH, MINUS, EQUAL, NONE
   };
 
   //for mouse button
@@ -35,6 +35,15 @@ namespace Geek
   {
     RMB,
     LMB,
-    MIDDLE
+    MIDDLE,
+    NONE
+  };
+
+  enum class ButtonState
+  {
+    PRESS,
+    RELEASE,
+    CLICK,
+    NONE
   };
 };

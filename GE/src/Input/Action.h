@@ -7,10 +7,14 @@ namespace Geek
 	{
 
 	private:
+		
 		KeyCode m_KeyCode;
-		MouseButton m_mouseButton;
+		MouseButton m_mouseButton; //TODO: added support for gamepad later
+		ButtonState m_state;
 
 	public:
+		Action();
+		~Action(){}
 		// Inherited via IConfigVar
 		void BindToConfig(pugi::xml_node& root) override;
 
