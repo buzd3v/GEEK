@@ -1,0 +1,19 @@
+<Config>
+	<WindowConfig>
+		<configName>WindowSetting</configName>
+		<screenWidth>800</screenWidth>
+		<screenHeight>600</screenHeight>
+		<windowName>My Engine</windowName>
+		<showCusor>0</showCusor>
+		<fullScreen>0</fullScreen>	
+	</WindowConfig>
+	<WindowConfig>
+		<configName>Window_1_Setting</configName>
+		<screenWidth>800</screenWidth>
+		<screenHeight>600</screenHeight>
+		<windowName>My Engine</windowName>
+		<showCusor>0</showCusor>
+		<fullScreen>0</fullScreen>	
+	</WindowConfig>
+</Config>
+			
