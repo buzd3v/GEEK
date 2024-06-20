@@ -11,7 +11,6 @@ project "GE"
 	links {
 		"glfw",
 		"glad",
-		--"stb_image",
 		"opengl32.lib",
 		"imgui",
 		"assimp",

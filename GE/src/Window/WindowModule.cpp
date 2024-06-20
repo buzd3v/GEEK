@@ -6,7 +6,7 @@ using namespace Geek::WindowAPI;
 
 void Geek::WindowModule::Startup()
 {
-	ConfigMgr<WindowConfig>::GetInstance()->Construct("WindowConfig.xml", "Config");
+	ConfigMgr<WindowConfig>::GetInstance()->Construct("Config/WindowConfig.xml", "Config");
 	m_window = new GlfwWindow();
 	m_window->CreateContext();
 	m_window->CreateWindow();

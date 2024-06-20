@@ -6,16 +6,14 @@
 
 namespace Geek
 {
-	class ActionMgr : public ConfigMgr<Action>
+	class ActionMgr : public ConfigMgr<IAction>
 	{
-	public:
-		template <typename T>
-		void Connect(std::string actionName, std::function<T> callback);
-		void Excute(std::string actionName);
-	};
+	private:
 
-	template<typename T>
-	inline void ActionMgr::Connect(std::string actionName, std::function<T> callback)
-	{
-	}
+	public:
+		template<typename T, typename... args>
+		void Connect(std::string actionName, Callback<T(args...)> callback);
+		void Disconnect(std::string actionName); 
+	};
+	
 }

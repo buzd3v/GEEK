@@ -1,19 +1,29 @@
 #include "Action.h"
 
 
-Geek::Action::Action()
+Geek::IAction::IAction()
 {
 	m_configName = "";
-	m_KeyCode = KeyCode::NONE;
+	m_keyCode = KeyCode::NONE;
 	m_mouseButton = MouseButton::NONE;
-	m_state = ButtonState::NONE;
 }
 
-void Geek::Action::BindToConfig(pugi::xml_node& root)
+#define GETVALUE(x) KeyCode::##x
+
+void Geek::IAction::BindToConfig(pugi::xml_node& root)
 {
+	SET_CONFIG_VAR(configName, string); //MUST IMPLEMENT THIS LINE OF CODE FOR ALL CONFIG
+
+	//Set keycode enum
 	SET_CONFIG_VAR_STR(keyCode);
+	m_keyCode = GET_ENUM(KeyCode, SID(keyCode));
+
+	//Set mouse button
+	SET_CONFIG_VAR_STR(mouseButton);
+	m_mouseButton = GET_ENUM(MouseButton, SID(mouseButton));
+
 }
 
-void Geek::Action::_ParseToKeyCode(std::string keyCode)
+void Geek::IAction::_ParseToKeyCode(std::string keyCode)
 {
 }

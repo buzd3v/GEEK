@@ -1,0 +1,7 @@
+<Config>
+    <Action>
+        <configName>MOVE</configName>
+        <keyCode>KEYCODE_J</keyCode>
+        <condition></condition>
+    </Action>
+</Config>
