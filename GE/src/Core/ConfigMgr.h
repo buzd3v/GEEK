@@ -5,7 +5,6 @@
 #include <unordered_map>
 
 #include "IConfigVar.h"
-#include <type_traits>
 #include <sid.h>
 #include <Singleton.h>
 
@@ -23,6 +22,7 @@ namespace Geek //TODO: consider dynamic alloc or not
 		pugi::xml_node m_firstChild;
 		std::string m_rootNodeName;
 		
+	protected:
 		//store config
 		std::unordered_map<StringId, ConfigVar> m_listConfig;
 	public:

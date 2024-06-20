@@ -28,7 +28,7 @@ namespace Geek {
 		std::cout << "Error accessing " << #varName << " node element!" << std::endl;		\
 		return;																												\
 	 }																															\
-	std::string varName = node.text().as_string();													\
+	const char* varName = node.text().as_string();													\
 
 #define GET_CONFIG_VAR(config, variable) config.variable				
 		
