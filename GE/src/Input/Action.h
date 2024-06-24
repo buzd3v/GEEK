@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/IConfigVar.h"
 #include "KeyCode.h"
-#include <any>
+#include "Core/Alias.h"
 namespace Geek
 {
 	class IAction : public IConfigVar
@@ -23,11 +23,11 @@ namespace Geek
 
 	};
 
-	template<typename T, typename... args>
+	template<typename... args>
 	class Action : IAction
 	{
 	protected:
-		Callback<T, args...> callback;
+		Callback<args..> callback;
 
 	};
 } // namespace Geek

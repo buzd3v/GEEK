@@ -1,8 +1,8 @@
 #include "ActionMgr.h"
 
 
-template<typename T, typename... args>
-inline void Geek::ActionMgr::Connect(std::string actionName, Callback<T(args...)> callback)
+template<typename... args>
+inline void Geek::ActionMgr::Connect(std::string actionName, Callback<args...> callback)
 {
 
 }

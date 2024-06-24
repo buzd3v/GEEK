@@ -154,7 +154,6 @@ namespace Geek
 
   #define GET_ENUM(enumClassName, enumValueName) enumClassName##HashMap[enumValueName]
 
-  template <typename T, typename... args>
-  using Callback = std::function<T(args...)>;
+
 
 };

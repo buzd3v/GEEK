@@ -11,8 +11,8 @@ namespace Geek
 	private:
 
 	public:
-		template<typename T, typename... args>
-		void Connect(std::string actionName, Callback<T(args...)> callback);
+		template<typename... args>
+		void Connect(std::string actionName, Callback<args ... > callback);
 		void Disconnect(std::string actionName); 
 	};
 	
