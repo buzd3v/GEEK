@@ -11,7 +11,7 @@
 namespace Geek //TODO: consider dynamic alloc or not 
 {
 	template<typename ConfigVar, typename = std::enable_if_t<std::is_base_of<IConfigVar, ConfigVar>::value>> //only allows for class derived from IConfigVar
-	class ConfigMgr : public SingletonDclp<ConfigMgr<ConfigVar>>  // TODO: Make this as template because it will be the same for all class config
+	class ConfigMgr  // TODO: Make this as template because it will be the same for all class config
 	{
 	private:
 		std::string m_filePath;
@@ -82,3 +82,5 @@ namespace Geek //TODO: consider dynamic alloc or not
 		}
 	};
 };
+
+//TODO: <First priority> Something happen with this singleton => remove ActionMgr class and implement Connect, etc... in InputModule

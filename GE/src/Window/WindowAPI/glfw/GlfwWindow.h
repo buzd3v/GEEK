@@ -9,9 +9,9 @@ namespace Geek {
 		{
 		private:
 
-			GLFWwindow* m_windowHandle;
 
 		public:
+			GLFWwindow* m_windowHandle;
 			void CreateContext() override;
 			void CreateWindow() override;
 			void Update(float deltaTime) override;

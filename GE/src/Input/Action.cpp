@@ -6,6 +6,8 @@ Geek::Action::Action()
 	m_configName = "";
 	m_keyCode = KeyCode::NONE;
 	m_mouseButton = MouseButton::NONE;
+	m_modifier = Modifier::NONE;
+	m_state = KeyState::PRESS;
 }
 
 #define GETVALUE(x) KeyCode::##x
@@ -16,14 +18,11 @@ void Geek::Action::BindToConfig(pugi::xml_node& root)
 
 	//Set keycode enum
 	SET_CONFIG_VAR_STR(keyCode);
-	m_keyCode = GET_ENUM(KeyCode, SID(keyCode));
+	m_keyCode = GET_ENUM(KeyCode, keyCode);
 
 	//Set mouse button
 	SET_CONFIG_VAR_STR(mouseButton);
-	m_mouseButton = GET_ENUM(MouseButton, SID(mouseButton));
+	m_mouseButton = GET_ENUM(MouseButton, mouseButton);
 
 }
 
-void Geek::Action::_ParseToKeyCode(std::string keyCode)
-{
-}

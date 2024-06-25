@@ -7,9 +7,10 @@ namespace Geek
 	using u64 = uint64_t;
 
 	template <typename... args>
-	class Delegate :
+	class Delegate 
 	{
-		static std::unordered_map<u64, Callback<args...>> m_callbackList;
+	public:
+		std::unordered_map<u64, Callback<args...>> m_callbackList;
 
 	public:
 		Delegate() = default;

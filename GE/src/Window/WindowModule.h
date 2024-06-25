@@ -7,12 +7,15 @@ namespace Geek {
 	class WindowModule : public IModule {
 
 	public:
+		WindowModule() = default;
+
 		void Startup() override;
 		void Update(float deltaTime) override;
 		void Shutdown() override;
 
-	private:
+
 		WindowAPI::GlfwWindow* m_window;
+	private:
 	};
 
 }; //namespace Geek

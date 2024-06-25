@@ -16,6 +16,8 @@ namespace Geek {
 
 		//Engine Module
 		class WindowModule* m_windowModule;
+		class InputModule* m_inputModule;
+
 
 	private:
 		void InitializeModule();

@@ -9,17 +9,14 @@ namespace Geek
 	class ActionMgr : public ConfigMgr<Action>
 	{
 	private:
-
+		ActionMgr(std::string filePath, std::string rootNodeName) : ConfigMgr<Action>(filePath, rootNodeName) {
+			
+		}
 	public:
-
 		//connect each  
-		template<typename... args>
-		void Connect(std::string actionName, Callback<args ... > callback);
-
+		void Connect(std::string actionName, Callback<> callback);
 		void Disconnect(std::string actionName);
-
-		template <typename ...args>
-		void Invoke(args ...);
+		void Invoke();
 	};
 
 }

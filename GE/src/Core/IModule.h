@@ -1,7 +1,7 @@
 #pragma once
-
+#include <Singleton.h>
 namespace Geek {
-	class IModule
+	class IModule 
 	{
 	public: 
 		virtual void Startup() = 0;
