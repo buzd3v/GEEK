@@ -10,3 +10,9 @@ inline void Geek::ActionMgr::Connect(std::string actionName, Callback<args...> c
 void Geek::ActionMgr::Disconnect(std::string actionName)
 {
 }
+
+template<typename ...args>
+void Geek::ActionMgr::Invoke(args ...)
+{
+}
+

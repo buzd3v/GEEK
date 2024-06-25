@@ -1,15 +1,15 @@
 #pragma once
-#include <unordered_map>
 #include "Alias.h"
+#include <unordered_map>
+
 namespace Geek
 {
 	using u64 = uint64_t;
 
 	template <typename... args>
-	class Delegate
+	class Delegate :
 	{
-		std::unordered_map<u64, Callback<args...>> m_callbackList;
-		static u64 m_key = 0;
+		static std::unordered_map<u64, Callback<args...>> m_callbackList;
 
 	public:
 		Delegate() = default;
@@ -19,17 +19,17 @@ namespace Geek
 		Delegate& operator=(Delegate&&) = default;
 		~Delegate() = default;
 
-		u64 Subscribe(Callback<args ...> callback);
+		u64 Subscribe(u64 key, Callback<args ...> callback);
 		void Unsubscribe(u64 key);
 		void Invoke();
 
 		void Clear();
 	};
 	template<typename ...args>
-	inline u64 Delegate<args...>::Subscribe(Callback<args...> callback)
+	inline u64 Delegate<args...>::Subscribe(u64 key, Callback<args...> callback)
 	{
-		m_callbackList.insert({ m_key, callback });
-		return m_key++;
+		m_callbackList.insert({ key, callback });
+		return key;
 	}
 	template<typename ...args>
 	inline void Delegate<args...>::Unsubscribe(u64 key)

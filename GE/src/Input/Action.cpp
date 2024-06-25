@@ -1,7 +1,7 @@
 #include "Action.h"
 
 
-Geek::IAction::IAction()
+Geek::Action::Action()
 {
 	m_configName = "";
 	m_keyCode = KeyCode::NONE;
@@ -10,7 +10,7 @@ Geek::IAction::IAction()
 
 #define GETVALUE(x) KeyCode::##x
 
-void Geek::IAction::BindToConfig(pugi::xml_node& root)
+void Geek::Action::BindToConfig(pugi::xml_node& root)
 {
 	SET_CONFIG_VAR(configName, string); //MUST IMPLEMENT THIS LINE OF CODE FOR ALL CONFIG
 
@@ -24,6 +24,6 @@ void Geek::IAction::BindToConfig(pugi::xml_node& root)
 
 }
 
-void Geek::IAction::_ParseToKeyCode(std::string keyCode)
+void Geek::Action::_ParseToKeyCode(std::string keyCode)
 {
 }

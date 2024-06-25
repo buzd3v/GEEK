@@ -1,20 +1,21 @@
 #pragma once
+#include "Core/Alias.h"
 #include "Core/IConfigVar.h"
 #include "KeyCode.h"
-#include "Core/Alias.h"
+
 namespace Geek
 {
-	class IAction : public IConfigVar
+	class Action : public IConfigVar
 	{
 
 	private:
-		
+
 		KeyCode m_keyCode;
 		MouseButton m_mouseButton; //TODO: added support for gamepad later
 
 	public:
-		IAction();
-		~IAction(){}
+		Action();
+		~Action() {}
 		// Inherited via IConfigVar
 		void BindToConfig(pugi::xml_node& root) override;
 
@@ -23,11 +24,4 @@ namespace Geek
 
 	};
 
-	template<typename... args>
-	class Action : IAction
-	{
-	protected:
-		Callback<args..> callback;
-
-	};
 } // namespace Geek

@@ -1,12 +1,12 @@
+#include "Core/Alias.h"
 #include "GLFW/glfw3.h"
 #include "KeyCode.h"
-#include "Core/Alias.h"
 
 namespace Geek
 {
 	class GLFWInput
 	{
-		static uint16_t RegisterKeyCallback(Callback<GLFWwindow*, int, int, int, int> callback);
+		static u64 RegisterKeyCallback(Callback<GLFWwindow*, int, int, int, int> callback);
 		static void UnregisteredKeyCallback(); //
 	};
 }
